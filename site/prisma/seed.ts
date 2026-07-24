@@ -1,6 +1,9 @@
 import { PrismaClient } from '../src/generated/prisma';
 import { PrismaLibSql } from '@prisma/adapter-libsql';
 import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '../site/.env' });
 
 const connectionString = process.env.DATABASE_URL || 'file:./dev.db';
 const adapter = new PrismaLibSql({ url: connectionString });
@@ -10,17 +13,19 @@ async function main() {
   console.log('🌱 Starting database seed...');
 
   // Create admin user
-  const adminPasswordHash = await bcrypt.hash('admin123', 12);
+  const adminUsername = process.env.ADMIN_USERNAME || 'admin';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  const adminPasswordHash = await bcrypt.hash(adminPassword, 12);
   await prisma.adminUser.upsert({
-    where: { username: 'admin' },
+    where: { username: adminUsername },
     update: {},
     create: {
-      username: 'admin',
+      username: adminUsername,
       passwordHash: adminPasswordHash,
       role: 'admin',
     },
   });
-  console.log('✅ Admin user created: admin / admin123');
+  console.log(`✅ Admin user created: ${adminUsername} / ${adminPassword}`);
 
   // Seed services
   const services = [
