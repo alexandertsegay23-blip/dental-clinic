@@ -1,12 +1,231 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Custom utilities */
-@layer utilities {
-  .bg-glass {
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+/* ============================================
+   CSS VARIABLES — MODERN THEME SYSTEM
+   Brand: Blue & White (matches logo #0EA5E9)
+   ============================================ */
+:root {
+  /* Brand colors — Sky Blue primary (matches logo) */
+  --color-primary: #0EA5E9;
+  --color-primary-hover: #0284C7;
+  --color-secondary: #1E40AF;
+  --color-accent: #F8FAFC;
+  --color-accent-hover: #F1F5F9;
+
+  /* Surfaces */
+  --color-background: #FFFFFF;
+  --color-surface: #F8FAFC;
+  --color-card-bg: #FFFFFF;
+  --color-section-alt: #F1F5F9;
+  --color-nav-bg: rgba(255, 255, 255, 0.85);
+
+  /* Text */
+  --color-text: #0F172A;
+  --color-text-muted: #64748B;
+  --color-text-inverse: #FFFFFF;
+
+  /* Borders & UI */
+  --color-border: #E2E8F0;
+  --color-border-light: #F1F5F9;
+  --color-success: #059669;
+  --color-warning: #D97706;
+  --color-error: #DC2626;
+
+  /* Accent variants */
+  --color-accent-subtle: rgba(14, 165, 233, 0.08);
+  --color-primary-subtle: rgba(14, 165, 233, 0.1);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-glow: 0 0 20px rgba(14, 165, 233, 0.2);
+
+  /* Radius */
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+}
+
+/* ============================================
+   DARK MODE — Blue brand preserved
+   ============================================ */
+.dark {
+  --color-primary: #38BDF8;
+  --color-primary-hover: #0EA5E9;
+  --color-secondary: #3B82F6;
+  --color-accent: #1E293B;
+  --color-accent-hover: #334155;
+
+  --color-background: #0F172A;
+  --color-surface: #1E293B;
+  --color-card-bg: #1E293B;
+  --color-section-alt: #162032;
+  --color-nav-bg: rgba(15, 23, 42, 0.85);
+
+  --color-text: #F1F5F9;
+  --color-text-muted: #94A3B8;
+  --color-text-inverse: #0F172A;
+
+  --color-border: #334155;
+  --color-border-light: #1E293B;
+  --color-success: #34D399;
+  --color-warning: #FBBF24;
+  --color-error: #F87171;
+
+  --color-accent-subtle: rgba(56, 189, 248, 0.1);
+  --color-primary-subtle: rgba(56, 189, 248, 0.1);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 24px rgba(56, 189, 248, 0.2);
+}
+
+/* ============================================
+   TAILWIND COLOR MAPPINGS
+   ============================================ */
+@theme {
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-card-bg: var(--color-card-bg);
+  --color-section-alt: var(--color-section-alt);
+  --color-nav-bg: var(--color-nav-bg);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-border: var(--color-border);
+  --color-border-light: var(--color-border-light);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+  --color-accent-subtle: var(--color-accent-subtle);
+  --color-primary-subtle: var(--color-primary-subtle);
+
+  --radius: var(--radius);
+  --radius-sm: var(--radius-sm);
+  --radius-lg: var(--radius-lg);
+  --radius-full: var(--radius-full);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+@utility glass {
+  background-color: color-mix(in srgb, var(--color-surface) 70%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: var(--radius);
+  border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+  box-shadow: var(--shadow-md);
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.display {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.heading-2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.overline {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.body-lg {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+/* ============================================
+   SCROLL & SELECTION
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+
+/* ============================================
+   DARK MODE GLOBAL
+   ============================================ */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ============================================
+   FOCUS STYLES (Accessibility)
+   ============================================ */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }

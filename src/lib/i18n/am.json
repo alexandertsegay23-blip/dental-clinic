@@ -1,0 +1,136 @@
+{
+  "hero": {
+    "yearsExperience": "የልምድ ዓመታት",
+    "happyPatients": "ደስታ ያላቸው ሕክምና ተቀባዮች",
+    "expertDoctors": "ሙያዊ ሐኪሞች"
+  },
+  "nav": {
+    "home": "መነሻ",
+    "services": "አገልግሎቶች",
+    "doctors": "ሐኪሞች",
+    "about": "ስለእኛ",
+    "more": "ተጨማሪ",
+    "gallery": "ጋለሪ",
+    "beforeAfter": "በፊት እና ከዚያ በኋላ",
+    "blog": "ብሎግ",
+    "testimonials": "ምስክርነቶች",
+    "faq": "የተለመዱ ጥያቄዎች",
+    "contact": "ግንኙነት",
+    "bookNow": "አሁን ይውሱ",
+    "bookAppointment": "ቀጠሮ ይውሱ",
+    "darkMode": "ጨለማ ሁነታ",
+    "callClinic": "ክሊኒክ ይደውሉ"
+  },
+  "hero": {
+    "overline": "የላቀ የጥርስ እንክብካቤ",
+    "title": "ሺህ ፊትዎ፣ ፍላጎታችን",
+    "subtitle": "በአዲስ ቴክኖሎጂ እና በርካታ እና ጥምቀት ያለው አንድነት የጥርስ ህክምና ይቀበሉ።",
+    "cta": "ቀጠሮ ይውሱ",
+    "ctaSecondary": "ተጨማሪ ይመልከቱ"
+  },
+  "contact": {
+    "title": "ያግኙን",
+    "subtitle": "ጥያቄዎች አሉዎት ወይም ቀጠሮ ለማስያዝ ይፈልጋሉ? ሺህ ፊትዎን ለማብራት እዚህ ነን።",
+    "getInTouch": "ያግኙን",
+    "visitClinic": "ክሊኒካችንን ይጎብኙ",
+    "location": "አድራሻ",
+    "phone": "ስልክ",
+    "email": "ኢሜይል",
+    "workingHours": "የስራ ሰዓታት",
+    "getDirections": "መሥመር ይውሰዱ",
+    "viewOnGoogleMaps": "በጉግል ካርታ ይመልከቱ",
+    "sendMessage": "መልዕክት ይላኩ",
+    "messageSent": "መልዕክት ተልኳል!",
+    "messageSentSubtitle": "በቅርቡ እንመልሳለን።",
+    "sendAnother": "ሌላ መልዕክት ላክ",
+    "yourName": "ስምዎ",
+    "emailAddress": "ኢሜይል አድራሻ",
+    "phoneNumber": "ስልክ ቁጥር",
+    "yourMessage": "መልዕክትዎ",
+    "sendMessageBtn": "መልዕክት ላክ",
+    "sending": "በመላክ ላይ...",
+    "followUs": "ይከተሉን",
+    "chatOnWhatsApp": "በዋትሳፕ ይወያዩ",
+    "clinicLocation": "የክሊኒክ አድራሻ",
+    "addAddressInSettings": "አድራሻዎን በማዘጋጃ ያክሉ",
+    "addressNotSet": "አድራሻ አልተዘጋጀም",
+    "phoneNotSet": "ስልክ አልተዘጋጀም",
+    "emailNotSet": "ኢሜይል አልተዘጋጀም",
+    "hoursNotSet": "ሰዓታት አልተዘጋጀም"
+  },
+  "services": {
+    "title": "አገልግሎቶቻችን",
+    "subtitle": "ለፍላጎቶችዎ የተበጁ ሙሉ በሙሉ የጥርስ እንክብካቤ",
+    "viewAll": "ሁሉንም አገልግሎቶች ይመልከቱ",
+    "learnMore": "ተጨማሪ ይወቁ"
+  },
+  "doctors": {
+    "title": "ቡድናችንን ይገናዙ",
+    "subtitle": "ለጥርስ ጤናዎ የተሟሉ ሙያዊ ሰዎች",
+    "viewAll": "ሁሉንም ሐኪሞች ይመልከቱ"
+  },
+  "about": {
+    "title": "ስለእኛ",
+    "subtitle": "በጥርስ እንክብካቤ ላይ የተለየ አገልግሎት ለማቅረብ የተሟሉን"
+  },
+  "testimonials": {
+    "title": "የሕክምና ተቀባዮች ምስክርነቶች",
+    "subtitle": "ሕክምናችን ስለሚሰጡት ልምምድ ይስሙ"
+  },
+  "gallery": {
+    "title": "ጋለሪያችን",
+    "subtitle": "ዘመናዊ መገልገያችንን እና ደስታ ያላቸውን ሕክምና ተቀባዮችን ይመልከቱ"
+  },
+  "blog": {
+    "title": "የጥርስ ጤና ብሎግ",
+    "subtitle": "በጥርስ እንክብካቤ እና በአፈፃፀሚ ጤና ላይ የቅርብ ጊዜ መረጃዎችን ያግኙ",
+    "readMore": "ተጨማሪ አንብቡ",
+    "publishedOn": "የተለጠጠበት",
+    "by": "በ"
+  },
+  "faq": {
+    "title": "የተለመዱ ጥያቄዎች",
+    "subtitle": "ስለ አገልግሎቶቻችን የተለመዱ ጥያቄዎችን መልስ ያግኙ"
+  },
+  "appointment": {
+    "title": "ቀጠሮ ይውሱ",
+    "subtitle": "ዛሬ ጉብኝትዎን ያቀዱ",
+    "selectService": "አገልግሎት ይምረጡ",
+    "selectDoctor": "ሐኪም ይምረጡ",
+    "selectDate": "ቀን ይምረጡ",
+    "selectTime": "ሰዓት ይምረጡ",
+    "yourDetails": "የእርስዎ ዝርዝሮች",
+    "fullName": "ሙሉ ስም",
+    "email": "ኢሜይል",
+    "phone": "ስልክ",
+    "notes": "ተጨማሪ ማስታወሻዎች",
+    "bookAppointment": "ቀጠሮ ይውሱ",
+    "bookingSuccess": "ቀጠሮ ተይዟል!",
+    "bookingSuccessSubtitle": "ቀጠሮዎን በቅርቡ እናረጋግጣለን።"
+  },
+  "footer": {
+    "quickLinks": "ፈጣን አገናኞች",
+    "contactInfo": "የግንኙነት መረጃ",
+    "newsletter": "ዜና መልዕክት",
+    "subscribe": "ይመዝገቡ",
+    "subscribeText": "የቅርብ ጊዜ ማሻሻያዎችን እና እድሎችን ያግኙ",
+    "emailPlaceholder": "ኢሜይልዎን ያስገቡ",
+    "allRightsReserved": "ሁሉም መብቶች የተጠበቁ ናቸው",
+    "privacyPolicy": "የግል እንቅስቃሴ ፖሊሲ",
+    "termsOfService": "የአገልግሎት ውሎች"
+  },
+  "common": {
+    "loading": "በመጫን ላይ...",
+    "error": "ስህተት",
+    "retry": "እንደገና ሞከር",
+    "close": "መውጫ",
+    "submit": "አስገባ",
+    "cancel": "ሰርዝ",
+    "confirm": "አረጋግጥ",
+    "search": "ፈልግ",
+    "filter": "ማጣሪያ",
+    "sort": "ሰርዝ",
+    "noResults": "ምንም ውጤት አልተገኘም",
+    "seeAll": "ሁሉንም ይመልከቱ"
+  }
+}

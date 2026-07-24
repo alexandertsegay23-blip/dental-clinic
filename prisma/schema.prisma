@@ -1,0 +1,224 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String   @map("password_hash")
+  role         String   @default("admin")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  sessions     Session[]
+  resetTokens  PasswordResetToken[]
+
+  @@map("admin_users")
+}
+
+model Session {
+  id         Int      @id @default(autoincrement())
+  token      String   @unique
+  userId     Int      @map("user_id")
+  expiresAt  DateTime @map("expires_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+  rememberMe Boolean  @default(false) @map("remember_me")
+
+  user AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  used      Boolean  @default(false)
+
+  user AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("password_reset_tokens")
+}
+
+model Patient {
+  id              Int      @id @default(autoincrement())
+  fullName        String   @map("full_name")
+  phone           String
+  email           String?
+  dob             String?  @map("dob")
+  medicalHistory  String?  @map("medical_history")
+  dateOfBirth     String?  @map("date_of_birth")
+  gender          String?
+  address         String?
+  emergencyContact String? @map("emergency_contact")
+  emergencyPhone  String?  @map("emergency_phone")
+  allergies       String?
+  notes           String?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  appointments Appointment[]
+
+  @@map("patients")
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  duration    String
+  price       Int
+  iconName    String   @map("icon_name")
+  benefits    String
+  isActive    Int      @default(1) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  appointments Appointment[]
+
+  @@map("services")
+}
+
+model Doctor {
+  id               Int      @id @default(autoincrement())
+  name             String
+  qualifications   String
+  biography        String
+  yearsExperience  Int      @map("years_experience")
+  photoUrl         String   @map("photo_url")
+  isActive         Int      @default(1) @map("is_active")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  doctorSocial DoctorSocial[]
+  appointments Appointment[]
+
+  @@map("doctors")
+}
+
+model DoctorSocial {
+  id        Int      @id @default(autoincrement())
+  doctorId  Int      @map("doctor_id")
+  platform  String
+  url       String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  doctor Doctor @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@map("doctor_social")
+}
+
+model Appointment {
+  id              Int      @id @default(autoincrement())
+  patientId       Int      @map("patient_id")
+  doctorId        Int?
+  serviceId       Int      @map("service_id")
+  date            String
+  timeSlot        String   @map("time_slot")
+  status          String   @default("pending")
+  notes           String?
+  remindSms       Boolean  @default(false) @map("remind_sms")
+  remindWhatsapp  Boolean  @default(false) @map("remind_whatsapp")
+  reminderSent    Boolean  @default(false) @map("reminder_sent")
+  smsConfirmed    Boolean  @default(false) @map("sms_confirmed")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  patient   Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  service   Service   @relation(fields: [serviceId], references: [id])
+  doctor    Doctor?   @relation(fields: [doctorId], references: [id])
+
+  @@map("appointments")
+}
+
+model Testimonial {
+  id           Int      @id @default(autoincrement())
+  patientName  String   @map("patient_name")
+  treatment    String
+  quote        String
+  rating       Int
+  isApproved   Int      @default(0) @map("is_approved")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("testimonials")
+}
+
+model GalleryImage {
+  id          Int      @id @default(autoincrement())
+  title       String
+  url         String
+  altText     String   @map("alt_text")
+  description String
+  category    String
+  sortOrder   Int      @default(0) @map("sort_order")
+  isActive    Int      @default(1) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("gallery")
+}
+
+model BlogPost {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  excerpt     String
+  content     String
+  coverColor  String   @map("cover_color")
+  author      String
+  isPublished Int      @default(0) @map("is_published")
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("blog_posts")
+}
+
+model BeforeAfter {
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String
+  beforeImageUrl String  @map("before_image_url")
+  afterImageUrl  String  @map("after_image_url")
+  sortOrder     Int      @default(0) @map("sort_order")
+  isActive      Int      @default(1) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("before_after")
+}
+
+model FAQ {
+  id          Int      @id @default(autoincrement())
+  question    String
+  answer      String
+  category    String
+  sortOrder   Int      @default(0) @map("sort_order")
+  isActive    Int      @default(1) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("faqs")
+}
+
+model ContactSubmission {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String
+  message   String
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("contact_submissions")
+}
+
+model Setting {
+  key   String @id
+  value String
+
+  @@map("settings")
+}

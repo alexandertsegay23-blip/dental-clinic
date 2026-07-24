@@ -1,0 +1,136 @@
+{
+  "hero": {
+    "yearsExperience": "Years Experience",
+    "happyPatients": "Happy Patients",
+    "expertDoctors": "Expert Doctors"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "doctors": "Doctors",
+    "about": "About",
+    "more": "More",
+    "gallery": "Gallery",
+    "beforeAfter": "Before & After",
+    "blog": "Blog",
+    "testimonials": "Testimonials",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "bookNow": "Book Now",
+    "bookAppointment": "Book an Appointment",
+    "darkMode": "Dark Mode",
+    "callClinic": "Call clinic"
+  },
+  "hero": {
+    "overline": "Premium Dental Care",
+    "title": "Your Smile, Our Passion",
+    "subtitle": "Experience world-class dental treatments with cutting-edge technology and a gentle, caring approach.",
+    "cta": "Book Appointment",
+    "ctaSecondary": "Learn More"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have questions or want to schedule an appointment? We're here to help you smile brighter.",
+    "getInTouch": "Get In Touch",
+    "visitClinic": "Visit Our Clinic",
+    "location": "Location",
+    "phone": "Phone",
+    "email": "Email",
+    "workingHours": "Working Hours",
+    "getDirections": "Get Directions",
+    "viewOnGoogleMaps": "View on Google Maps",
+    "sendMessage": "Send us a Message",
+    "messageSent": "Message Sent!",
+    "messageSentSubtitle": "We'll get back to you shortly.",
+    "sendAnother": "Send another message",
+    "yourName": "Your Name",
+    "emailAddress": "Email Address",
+    "phoneNumber": "Phone Number",
+    "yourMessage": "Your Message",
+    "sendMessageBtn": "Send Message",
+    "sending": "Sending...",
+    "followUs": "Follow Us",
+    "chatOnWhatsApp": "Chat on WhatsApp",
+    "clinicLocation": "Clinic Location",
+    "addAddressInSettings": "Add your address in settings",
+    "addressNotSet": "Address not set",
+    "phoneNotSet": "Phone not set",
+    "emailNotSet": "Email not set",
+    "hoursNotSet": "Hours not set"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive dental care tailored to your needs",
+    "viewAll": "View All Services",
+    "learnMore": "Learn More"
+  },
+  "doctors": {
+    "title": "Meet Our Team",
+    "subtitle": "Experienced professionals dedicated to your dental health",
+    "viewAll": "View All Doctors"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Dedicated to providing exceptional dental care with a personal touch"
+  },
+  "testimonials": {
+    "title": "Patient Testimonials",
+    "subtitle": "Hear what our patients have to say about their experience"
+  },
+  "gallery": {
+    "title": "Our Gallery",
+    "subtitle": "Take a look at our modern facility and happy patients"
+  },
+  "blog": {
+    "title": "Dental Health Blog",
+    "subtitle": "Stay informed with the latest in dental care and oral health",
+    "readMore": "Read More",
+    "publishedOn": "Published on",
+    "by": "by"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about our dental services"
+  },
+  "appointment": {
+    "title": "Book an Appointment",
+    "subtitle": "Schedule your visit with us today",
+    "selectService": "Select Service",
+    "selectDoctor": "Select Doctor",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "yourDetails": "Your Details",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "notes": "Additional Notes",
+    "bookAppointment": "Book Appointment",
+    "bookingSuccess": "Appointment Booked!",
+    "bookingSuccessSubtitle": "We'll confirm your appointment shortly."
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "contactInfo": "Contact Info",
+    "newsletter": "Newsletter",
+    "subscribe": "Subscribe",
+    "subscribeText": "Get the latest updates and offers",
+    "emailPlaceholder": "Enter your email",
+    "allRightsReserved": "All rights reserved",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "noResults": "No results found",
+    "seeAll": "See All"
+  }
+}
