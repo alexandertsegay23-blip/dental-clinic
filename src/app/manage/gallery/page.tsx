@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Plus, Edit2, Trash2, X, Search, Image as ImageIcon } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
+import { Plus, Edit2, Trash2, X, Search, Image as ImageIcon, Upload, XCircle } from 'lucide-react';
 
 interface GalleryImage {
   id: number;
@@ -25,6 +25,9 @@ export default function GalleryPage() {
     sort_order: 0,
     is_active: true
   });
+  const [uploading, setUploading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string>('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchImages();
@@ -45,8 +48,42 @@ export default function GalleryPage() {
     }
   };
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const uploadFormData = new FormData();
+      uploadFormData.append('file', file);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadFormData,
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setFormData({ ...formData, url: data.url });
+        setPreviewUrl(data.url);
+      } else {
+        const error = await res.json();
+        alert(error.error || 'Failed to upload image');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('Failed to upload image');
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.url) {
+      alert('Please upload an image or enter a URL');
+      return;
+    }
     try {
       const url = editingImage ? `/api/admin/gallery/${editingImage.id}` : '/api/admin/gallery';
       const method = editingImage ? 'PATCH' : 'POST';
@@ -62,6 +99,10 @@ export default function GalleryPage() {
         setShowModal(false);
         setEditingImage(null);
         setFormData({ title: '', url: '', alt_text: '', sort_order: 0, is_active: true });
+        setPreviewUrl('');
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
       }
     } catch (error) {
       console.error('Failed to save image:', error);
@@ -77,6 +118,7 @@ export default function GalleryPage() {
       sort_order: image.sort_order,
       is_active: image.is_active === 1
     });
+    setPreviewUrl(image.url);
     setShowModal(true);
   };
 
@@ -117,6 +159,10 @@ export default function GalleryPage() {
           onClick={() => {
             setEditingImage(null);
             setFormData({ title: '', url: '', alt_text: '', sort_order: 0, is_active: true });
+            setPreviewUrl('');
+            if (fileInputRef.current) {
+              fileInputRef.current.value = '';
+            }
             setShowModal(true);
           }}
           className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-text-inverse rounded-lg hover:bg-primary-hover transition-colors"
@@ -210,13 +256,46 @@ export default function GalleryPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text mb-1">Image URL *</label>
+                <label className="block text-sm font-medium text-text mb-1">Upload Image</label>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/gif"
+                  onChange={handleFileUpload}
+                  disabled={uploading}
+                  className="w-full px-3 py-2 border border-border rounded-lg bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-primary file:text-text-inverse file:cursor-pointer hover:file:bg-primary-hover"
+                />
+                {uploading && <p className="text-sm text-text-muted mt-1">Uploading...</p>}
+                {previewUrl && (
+                  <div className="mt-2 relative inline-block">
+                    <img src={previewUrl} alt="Preview" className="h-20 w-auto rounded-lg border border-border" />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPreviewUrl('');
+                        setFormData({ ...formData, url: '' });
+                        if (fileInputRef.current) {
+                          fileInputRef.current.value = '';
+                        }
+                      }}
+                      className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600"
+                    >
+                      <XCircle size={16} />
+                    </button>
+                  </div>
+                )}
+                <p className="text-xs text-text-muted mt-1">Or enter a URL below</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-text mb-1">Image URL (optional)</label>
                 <input
                   type="text"
-                  required
                   value={formData.url}
-                  onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-                  placeholder="/images/gallery/photo.jpg"
+                  onChange={(e) => {
+                    setFormData({ ...formData, url: e.target.value });
+                    setPreviewUrl(e.target.value);
+                  }}
+                  placeholder="https://example.com/photo.jpg or /uploads/photo.jpg"
                   className="w-full px-3 py-2 border border-border rounded-lg bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>

@@ -11,24 +11,9 @@ import { PricingSection } from '@/components/PricingSection';
 import { ContactSection } from '@/components/ContactSection';
 import { FinalCTA } from '@/components/FinalCTA';
 import { Seo } from '@/components/Seo';
+import { getHomeData } from '@/lib/home-data';
 
-async function getHomeData() {
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/home`, { 
-      next: { revalidate: 300 } // Cache for 5 minutes
-    });
-    
-    if (!res.ok) {
-      throw new Error('Failed to fetch home data');
-    }
-    
-    return res.json();
-  } catch (error) {
-    console.error('Error fetching home data:', error);
-    return null;
-  }
-}
+export const revalidate = 300; // Cache for 5 minutes
 
 export default async function HomePage() {
   const data = await getHomeData();

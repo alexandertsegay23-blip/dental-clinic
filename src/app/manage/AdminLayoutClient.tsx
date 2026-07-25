@@ -48,9 +48,27 @@ export default function AdminLayoutClient({ children, user }: AdminLayoutClientP
     router.push('/manage/login');
   };
 
-  // Don't show admin layout on login page
+  // Allow unauthenticated access to login page
   if (pathname === '/manage/login') {
     return <>{children}</>;
+  }
+
+  // Show access denied for unauthenticated users on protected pages
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center space-y-4">
+          <h1 className="text-2xl font-bold text-text">Access Denied</h1>
+          <p className="text-text-muted">You need to log in to access the admin panel.</p>
+          <Link
+            href="/manage/login"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors"
+          >
+            Go to Login
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (

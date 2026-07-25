@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/FadeIn';
 import { Linkedin, Twitter, Instagram, Award } from '@/components/social-icons';
 
@@ -22,6 +22,7 @@ interface DoctorCarouselProps {
 export const DoctorCarousel: React.FC<DoctorCarouselProps> = ({ initialDoctors = [] }) => {
   const [doctors, setDoctors] = useState<Doctor[]>(initialDoctors);
   const [loading, setLoading] = useState(initialDoctors.length === 0);
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     if (initialDoctors.length > 0) {
@@ -79,13 +80,16 @@ export const DoctorCarousel: React.FC<DoctorCarouselProps> = ({ initialDoctors =
               <div className="group bg-[var(--color-background)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                 {/* Photo area */}
                 <div className="relative h-72 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10 flex items-center justify-center overflow-hidden">
-                  {doctor.photo_url ? (
+                  {doctor.photo_url && !imageErrors.has(doctor.id) ? (
                     <img
                       src={doctor.photo_url}
                       alt={doctor.name}
                       loading="lazy"
                       decoding="async"
                       className="w-full h-full object-cover"
+                      onError={() => {
+                        setImageErrors(prev => new Set(prev).add(doctor.id));
+                      }}
                     />
                   ) : (
                     <div className="w-28 h-28 rounded-full bg-[var(--color-card-bg)] shadow-card flex items-center justify-center text-[var(--color-primary)] text-3xl font-bold border-4 border-[var(--color-border)]">

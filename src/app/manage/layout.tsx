@@ -8,9 +8,5 @@ export default async function AdminLayout({
 }) {
   const user = await getCurrentUser();
 
-  if (!user) {
-    return null;
-  }
-
   return <AdminLayoutClient user={user}>{children}</AdminLayoutClient>;
 }

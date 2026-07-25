@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from '@/components/social-icons';
 
 interface FAQ {
@@ -16,53 +16,13 @@ interface FAQSectionProps {
 }
 
 export const FAQSection: React.FC<FAQSectionProps> = ({ initialFaqs = [] }) => {
-  const [faqs, setFaqs] = useState<FAQ[]>(initialFaqs);
-  const [loading, setLoading] = useState(initialFaqs.length === 0);
-  const [openId, setOpenId] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (initialFaqs.length > 0) {
-      setFaqs(initialFaqs);
-      setLoading(false);
-      if (initialFaqs.length > 0 && !openId) {
-        setOpenId(initialFaqs[0].id);
-      }
-      return;
-    }
-
-    const fetchFaqs = async () => {
-      try {
-        const res = await fetch('/api/faqs');
-        if (res.ok) {
-          const data = await res.json();
-          setFaqs(data.faqs || []);
-          if (data.faqs?.length > 0) {
-            setOpenId(data.faqs[0].id);
-          }
-        }
-      } catch (error) {
-        console.error('Failed to fetch FAQs:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchFaqs();
-  }, [initialFaqs]);
+  const [faqs] = useState<FAQ[]>(initialFaqs);
+  const [openId, setOpenId] = useState<number | null>(initialFaqs.length > 0 ? initialFaqs[0].id : null);
 
   const toggle = (id: number) => {
     if (openId === id) setOpenId(null);
     else setOpenId(id);
   };
-
-  if (loading) {
-    return (
-      <section className="py-16 bg-[var(--color-background)]" aria-labelledby="faq-title">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <div className="text-primary text-lg">Loading FAQs...</div>
-        </div>
-      </section>
-    );
-  }
 
   if (faqs.length === 0) {
     return null;

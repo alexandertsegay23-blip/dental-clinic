@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 interface GalleryItem {
   id: number;
@@ -18,6 +18,7 @@ interface GalleryGridProps {
 export const GalleryGrid: React.FC<GalleryGridProps> = ({ initialGallery = [] }) => {
   const [gallery, setGallery] = useState<GalleryItem[]>(initialGallery);
   const [loading, setLoading] = useState(initialGallery.length === 0);
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     if (initialGallery.length > 0) {
@@ -74,13 +75,16 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ initialGallery = [] })
               key={item.id}
               className="relative h-64 md:h-80 rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all duration-500 group cursor-pointer bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10"
             >
-              {item.url ? (
+              {item.url && !imageErrors.has(item.id) ? (
                 <img
                   src={item.url}
                   alt={item.alt_text || item.title}
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full object-cover"
+                  onError={() => {
+                    setImageErrors(prev => new Set(prev).add(item.id));
+                  }}
                 />
               ) : (
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-[var(--color-primary)]">

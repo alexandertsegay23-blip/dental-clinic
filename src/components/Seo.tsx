@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useClinic } from '@/components/ClinicProvider';
 
 interface FAQ {
@@ -15,27 +15,7 @@ interface SeoProps {
 
 export const Seo: React.FC<SeoProps> = ({ initialFaqs = [] }) => {
   const { settings } = useClinic();
-  const [faqs, setFaqs] = useState<FAQ[]>(initialFaqs);
-
-  useEffect(() => {
-    if (initialFaqs.length > 0) {
-      setFaqs(initialFaqs);
-      return;
-    }
-
-    const fetchFaqs = async () => {
-      try {
-        const res = await fetch('/api/faqs');
-        if (res.ok) {
-          const data = await res.json();
-          setFaqs(data.faqs || []);
-        }
-      } catch (error) {
-        console.error('Failed to fetch FAQs for SEO:', error);
-      }
-    };
-    fetchFaqs();
-  }, [initialFaqs]);
+  const [faqs] = useState<FAQ[]>(initialFaqs);
 
   const workingHours = settings.clinic_working_hours?.split(',').filter(Boolean) || [];
   const openingHours = workingHours.map(h => {

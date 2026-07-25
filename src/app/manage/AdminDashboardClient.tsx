@@ -32,7 +32,11 @@ interface AdminDashboardClientProps {
 export default function AdminDashboardClient({ initialStats, user }: AdminDashboardClientProps) {
   const stats = initialStats;
 
-  const statCards = [
+  // Error boundary fallback
+  let errorMessage = null;
+  let statCards: any[] = [];
+  try {
+    statCards = [
     { title: 'Appointments', value: stats.appointments.total || 0, icon: Calendar, href: '/manage/appointments', color: 'bg-blue-500', pending: stats.appointments.pending },
     { title: 'Patients', value: stats.patients.total || 0, icon: Users, href: '/manage/patients', color: 'bg-green-500' },
     { title: 'Services', value: stats.services.total || 0, icon: FileText, href: '/manage/services', color: 'bg-purple-500' },
@@ -43,6 +47,19 @@ export default function AdminDashboardClient({ initialStats, user }: AdminDashbo
     { title: 'FAQs', value: stats.faqs.total || 0, icon: MessageSquare, href: '/manage/faqs', color: 'bg-teal-500' },
     { title: 'Contact', value: stats.contact.total || 0, icon: MessageSquare, href: '/manage/contact', color: 'bg-red-500', new: stats.contact.new },
   ];
+  } catch (error) {
+    console.error('Dashboard render error:', error);
+    errorMessage = error instanceof Error ? error.message : 'Unknown error';
+  }
+
+  if (errorMessage) {
+    return (
+      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <p className="font-bold">Error rendering dashboard:</p>
+        <p>{errorMessage}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -77,7 +94,7 @@ export default function AdminDashboardClient({ initialStats, user }: AdminDashbo
                   )}
                 </div>
                 <div className={`w-12 h-12 rounded-lg ${card.color} bg-opacity-10 flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                  <Icon size={24} className={`text-[${card.color.replace('bg-', 'text-')}]`} />
+                  <Icon size={24} className={card.color.replace('bg-', 'text-')} />
                 </div>
               </div>
             </Link>

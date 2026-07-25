@@ -1,4 +1,4 @@
-import './src/config/clinic';
+import './src/config/clinic.ts';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

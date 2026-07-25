@@ -3,7 +3,7 @@ import { PrismaLibSql } from '@prisma/adapter-libsql';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '../site/.env' });
+dotenv.config({ path: '../.env' });
 
 const connectionString = process.env.DATABASE_URL || 'file:./dev.db';
 const adapter = new PrismaLibSql({ url: connectionString });
@@ -48,10 +48,10 @@ async function main() {
 
   // Seed doctors
   const doctors = [
-    { name: 'Dr. Sarah Johnson', qualifications: 'DDS, Harvard School of Dental Medicine', biography: 'With over 15 years of experience, Dr. Johnson provides comprehensive dental care with a gentle touch.', yearsExperience: 15, photoUrl: '/images/doctor-1.jpg' },
-    { name: 'Dr. Michael Chen', qualifications: 'DDS, UCLA School of Dentistry', biography: 'Dr. Chen is a renowned cosmetic dentist specializing in smile makeovers and veneers.', yearsExperience: 12, photoUrl: '/images/doctor-2.jpg' },
-    { name: 'Dr. Emily Rodriguez', qualifications: 'DDS, Columbia University', biography: 'Dr. Rodriguez is a board-certified orthodontist passionate about creating perfect smiles.', yearsExperience: 10, photoUrl: '/images/doctor-3.jpg' },
-    { name: 'Dr. James Wilson', qualifications: 'DDS, NYU College of Dentistry', biography: 'Dr. Wilson specializes in complex extractions and dental implant procedures.', yearsExperience: 18, photoUrl: '/images/doctor-4.jpg' },
+    { name: 'Dr. Sarah Johnson', qualifications: 'DDS, Harvard School of Dental Medicine', biography: 'With over 15 years of experience, Dr. Johnson provides comprehensive dental care with a gentle touch.', yearsExperience: 15, photoUrl: '' },
+    { name: 'Dr. Michael Chen', qualifications: 'DDS, UCLA School of Dentistry', biography: 'Dr. Chen is a renowned cosmetic dentist specializing in smile makeovers and veneers.', yearsExperience: 12, photoUrl: '' },
+    { name: 'Dr. Emily Rodriguez', qualifications: 'DDS, Columbia University', biography: 'Dr. Rodriguez is a board-certified orthodontist passionate about creating perfect smiles.', yearsExperience: 10, photoUrl: '' },
+    { name: 'Dr. James Wilson', qualifications: 'DDS, NYU College of Dentistry', biography: 'Dr. Wilson specializes in complex extractions and dental implant procedures.', yearsExperience: 18, photoUrl: '' },
   ];
 
   for (const doctor of doctors) {
@@ -78,10 +78,10 @@ async function main() {
 
   // Seed gallery
   const galleryItems = [
-    { title: 'Modern Reception Area', url: '/images/gallery-1.jpg', altText: 'Our welcoming reception area', description: 'Modern reception area', category: 'general' },
-    { title: 'Treatment Room', url: '/images/gallery-2.jpg', altText: 'State-of-the-art treatment rooms', description: 'Treatment room', category: 'general' },
-    { title: 'Smile Makeover', url: '/images/gallery-3.jpg', altText: 'Before and after smile transformation', description: 'Smile makeover', category: 'general' },
-    { title: 'Dental Equipment', url: '/images/gallery-4.jpg', altText: 'Latest dental technology', description: 'Dental equipment', category: 'general' },
+    { title: 'Modern Reception Area', url: '', altText: 'Our welcoming reception area', description: 'Modern reception area', category: 'general' },
+    { title: 'Treatment Room', url: '', altText: 'State-of-the-art treatment rooms', description: 'Treatment room', category: 'general' },
+    { title: 'Smile Makeover', url: '', altText: 'Before and after smile transformation', description: 'Smile makeover', category: 'general' },
+    { title: 'Dental Equipment', url: '', altText: 'Latest dental technology', description: 'Dental equipment', category: 'general' },
   ];
 
   for (const item of galleryItems) {
