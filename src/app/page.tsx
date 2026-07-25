@@ -1,3 +1,4 @@
+// Dental Clinic Website - Powered by Railway
 import Hero from '@/components/Hero';
 import { TrustBadges } from '@/components/TrustBadges';
 import { WhyChooseUs } from '@/components/WhyChooseUs';
