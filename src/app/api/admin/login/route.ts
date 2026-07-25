@@ -124,7 +124,7 @@ export async function PUT(request: NextRequest) {
 
     // In a real application, you would send an email here
     // For now, we'll log the token in the console (for development)
-    const resetUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/admin/reset-password?token=${token}`;
+    const resetUrl = `${process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')}/admin/reset-password?token=${token}`;
     
     console.log(`[Password Reset] Reset URL for ${user.username}: ${resetUrl}`);
 

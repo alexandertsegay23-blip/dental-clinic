@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getAll } from '@/lib/storage';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.example.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
   // Get blog posts for dynamic routes
   const blogPosts = (await getAll<any>('blog_posts')).filter((p: any) => p.is_active !== 0);

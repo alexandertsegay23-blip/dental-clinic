@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const clinicName = settingsMap.clinic_name || 'Dental Clinic';
   const siteDescription = settingsMap.site_description || 'Experience premium dental services. From preventive care to advanced cosmetic dentistry, our expert team ensures your smile shines.';
   const siteKeywords = settingsMap.site_keywords || 'dental clinic, dentistry, teeth cleaning, cosmetic dentistry';
-  const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000');
+  const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'));
 
   return {
     metadataBase,
@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: clinicName,
       description: siteDescription,
-      url: typeof window !== 'undefined' ? window.location.origin : (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.example.com'),
+      url: typeof window !== 'undefined' ? window.location.origin : (process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')),
       images: [
         {
           url: "/images/og-image.jpg",
