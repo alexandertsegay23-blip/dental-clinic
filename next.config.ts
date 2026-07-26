@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   },
   // Allow server-side code to run
   serverExternalPackages: ['@libsql/client', 'bcrypt'],
+  images: {
+    remotePatterns: [
+      { hostname: 'images.unsplash.com' },
+    ],
+  },
   async headers() {
     return [
       {
